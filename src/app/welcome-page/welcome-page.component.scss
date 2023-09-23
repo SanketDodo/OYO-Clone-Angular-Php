@@ -1,0 +1,276 @@
+mat-toolbar {
+  background: white !important;
+
+  .login-btn {
+    width: 200px;
+    height: 60px;
+    background: transparent;
+    color: #1c1c1c;
+    border: none;
+    font-family: semibold-font;
+    font-size: 18px;
+    border-radius: 6px;
+
+    i {
+      font-size: 24px;
+      margin-right: 8px;
+    }
+  }
+
+  .logged-btn {
+    width: 210px;
+    height: 60px;
+    padding: 10px;
+    background: transparent;
+    color: #1c1c1c;
+    border: none;
+    font-family: medium-font;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    i {
+      font-size: 22px;
+      opacity: 0.8;
+      margin-right: 4px;
+    }
+  }
+}
+
+.banner {
+  position: relative;
+  height: 300px;
+  background: var(--primary-bg);
+  color: white;
+
+  .banner-img {
+    position: absolute;
+    top: 30px;
+    left: 150px;
+  }
+
+  .banner-img-2 {
+    position: absolute;
+    bottom: 40px;
+    right: 150px;
+  }
+
+  .container-fluid {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      font-size: 45px;
+      font-family: bold-font;
+      z-index: 1;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin: 0;
+      line-height: 2;
+    }
+  }
+}
+
+//  ! seachbar
+.seach-bar {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  color: black !important;
+  font-family: semibold-font;
+  border-radius: 4px;
+  z-index: 1;
+
+  .matSelect {
+    width: 300px;
+    font-size: 15px !important;
+
+    ::ng-deep {
+      .mat-select-value-text {
+        font-size: 15px !important;
+        font-family: "semibold-font" !important;
+      }
+
+      .mat-select-value {
+        padding: 0px 15px;
+        font-size: 15px !important;
+        font-family: "semibold-font" !important;
+        color: #000000;
+      }
+
+      .mat-select-arrow {
+        color: rgb(100 94 94 / 54%);
+      }
+
+      .mat-select-arrow-wrapper {
+        padding-right: 10px;
+      }
+    }
+  }
+
+  .datePicker {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    padding: 0px 15px;
+    border-right: 1px solid rgb(192, 192, 192);
+    border-left: 1px solid rgb(192, 192, 192);
+    position: relative;
+
+    div:first-child {
+      width: 300px;
+      height: 60px;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      font-family: "semibold-font";
+      font-size: 15px;
+    }
+  }
+
+  ::ng-deep {
+    .mat-calendar-body-cell-content,
+    .mat-date-range-input-separator {
+      color: rgb(0 0 0 / 0%) !important;
+    }
+  }
+
+  .mat-date-range-input-inner {
+    font: inherit;
+    font-size: 14px !important;
+    font-family: "semibold-font" !important;
+  }
+
+  .mat-date-range-input-inner[disabled] {
+    color: rgb(0 0 0);
+  }
+
+  ::placeholder {
+    color: rgb(0, 0, 0);
+    opacity: 1;
+    /* Firefox */
+  }
+
+  h4 {
+    width: 300px;
+    padding: 0px 24px;
+    font-family: semibold-font;
+    cursor: pointer;
+  }
+
+  button {
+    cursor: pointer;
+    width: 180px;
+    height: 60px;
+    background-color: #1ab64f;
+    color: #fff;
+    font-family: semibold-font;
+    border: none;
+    padding: 10px 0px;
+    font-size: 16px;
+    border-radius: 0px 4px 4px 0px;
+  }
+}
+
+// ! card css
+.cardCss {
+  border-radius: 6px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+  .card-details {
+    padding: 14px;
+
+    h2 {
+      width: 100%;
+      font-size: 18px;
+      font-family: semibold-font;
+      margin-bottom: -10px;
+    }
+
+    h5 {
+      width: 100%;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+      font-family: light-font;
+      font-size: 13px;
+      opacity: 0.8;
+      line-height: 1.5em;
+    }
+
+    .rating-Box {
+      .rateBtn {
+        background-color: #1ab64f;
+        color: #fff;
+        width: 55px;
+        font-family: semibold-font;
+        border: none;
+        padding: 0px 0px;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+
+      span {
+        opacity: 0.9;
+        font-family: light-font;
+        font-size: 12px;
+      }
+    }
+
+    .facility-Box {
+      span {
+        font-family: light-font;
+        padding-right: 12px;
+        font-size: 13px;
+      }
+
+      i {
+        // font-size: 10px;
+      }
+    }
+
+    .price-box {
+      span {
+        font-family: medium-font;
+        padding-right: 4px;
+      }
+
+      span:first-child {
+        font-size: 22px;
+        font-family: semibold-font;
+        color: rgb(221, 0, 0);
+      }
+
+      span:nth-child(2) {
+        opacity: 0.9;
+        font-size: 12px;
+      }
+
+      span:last-child {
+        font-size: 12px;
+        color: rgb(221, 99, 0);
+      }
+    }
+
+    .action-btn {
+      button {
+        font-family: semibold-font;
+        width: 100%;
+        padding: 6px 0px;
+        border-radius: 6px;
+      }
+
+      button:first-child {
+        background-color: #1ab64f;
+        color: #ffffff;
+        border: 1px solid #1ab64f;
+      }
+    }
+  }
+}

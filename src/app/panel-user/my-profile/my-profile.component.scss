@@ -1,0 +1,78 @@
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  background: white;
+  color: #1c1c1c;
+  display: flex;
+  align-items: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  z-index: 999;
+
+  
+  .logged-btn {
+    width: 210px;
+    height: 60px;
+    padding: 10px;
+    background: transparent;
+    color: #1c1c1c;
+    border: none;
+    font-family: medium-font;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    i {
+      font-size: 22px;
+      opacity: 0.8;
+      margin-right: 4px;
+    }
+  }
+
+
+}
+
+.container {
+  .common_card {
+    border: 1px solid whitesmoke;
+    border-radius: 6px;
+    padding: 0px 24px;
+
+    h3 {
+      font-family: bold-font !important;
+      font-size: 22px;
+      margin-bottom: 0px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    i {
+      font-size: 18px;
+    }
+  }
+}
+
+.cancel-btn {
+  background: #e5e5e5 !important;
+  color: #515151 !important;
+  width: 150px;
+  font-family: semibold-font;
+  border: none;
+  padding: 10px 0px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.btn {
+  background-color: #1ab64f;
+  color: #fff;
+  width: 150px;
+  font-family: semibold-font;
+  border: none;
+  padding: 10px 0px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 25px;
+}

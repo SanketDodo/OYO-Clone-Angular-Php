@@ -1,0 +1,25 @@
+::ng-deep .mat-date-range-input-container {
+  display: none !important;
+}
+
+.datePicker {
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  // border-right: 1px solid #e9e9e9;
+  // border-left: 1px solid #e9e9e9;
+  position: relative;
+  border-radius: 6px;
+
+  div:first-child {
+    font-family: "semibold-font";
+    font-size: 15px;
+    white-space: nowrap;
+  }
+}
+
+::placeholder {
+  color: rgb(0, 0, 0);
+  opacity: 1;
+  /* Firefox */
+}

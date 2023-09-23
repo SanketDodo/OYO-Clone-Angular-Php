@@ -1,0 +1,164 @@
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  background: white;
+  color: #1c1c1c;
+  display: flex;
+  align-items: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  z-index: 999;
+
+
+  img {
+    margin-left: 24px;
+    margin-right: 50px;
+    width: 200px;
+  }
+
+  div:last-child {
+    font-family: medium-font;
+    font-size: 16px;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      font-size: 24px;
+      margin-right: 6px;
+      opacity: 0.4;
+    }
+  }
+
+  .login-btn {
+    background: transparent;
+    color: #1c1c1c;
+    border: none;
+    font-family: medium-font;
+    font-size: 16px;
+    opacity: 0.9 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      font-size: 24px;
+      margin-right: 6px;
+      opacity: 0.6 !important;
+    }
+
+  }
+
+  .logged-btn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 60px;
+  }
+
+
+}
+
+//  ! seachbar
+.seach-bar {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  color: black !important;
+  font-family: semibold-font;
+  border-radius: 4px;
+  z-index: 1;
+  border: 1px solid #e9e9e9;
+
+  .matSelect {
+    width: 100%;
+    font-size: 15px !important;
+
+    ::ng-deep {
+      .mat-select-value-text {
+        font-size: 15px !important;
+        font-family: "semibold-font" !important;
+      }
+
+      .mat-select-value {
+        padding: 0px 15px;
+        font-size: 15px !important;
+        font-family: "semibold-font" !important;
+        color: #000000;
+      }
+
+      .mat-select-arrow {
+        color: rgb(100 94 94 / 54%);
+      }
+
+      .mat-select-arrow-wrapper {
+        padding-right: 10px;
+      }
+    }
+  }
+
+  .datePicker {
+    display: flex;
+    align-items: center;
+    padding: 0px 20px;
+    border-right: 1px solid #e9e9e9;
+    border-left: 1px solid #e9e9e9;
+    position: relative;
+
+    // div:first-child {
+    //   width: 210px;
+    //   height: 60px;
+    //   position: absolute;
+    //   display: flex;
+    //   align-items: center;
+    //   font-family: "semibold-font";
+    //   font-size: 15px;
+    // }
+
+
+
+  }
+
+  ::ng-deep {
+
+    .mat-calendar-body-cell-content,
+    .mat-date-range-input-separator {
+      color: rgb(0 0 0 / 0%) !important;
+    }
+  }
+
+  .mat-date-range-input-inner {
+    font: inherit;
+    font-size: 15px !important;
+    font-family: "semibold-font" !important;
+  }
+
+  .mat-date-range-input-inner[disabled] {
+    color: rgb(0 0 0);
+  }
+
+  ::placeholder {
+    color: rgb(0, 0, 0);
+    opacity: 1;
+    /* Firefox */
+  }
+
+  h4 {
+    padding: 0px 24px;
+    font-family: semibold-font;
+    cursor: pointer;
+    font-size: 15px;
+  }
+
+  button {
+    cursor: pointer;
+    width: 100%;
+    background-color: #1ab64f;
+    color: #fff;
+    font-family: semibold-font;
+    border: none;
+    padding: 8px 24px;
+    font-size: 15px;
+    border-radius: 0px 4px 4px 0px;
+  }
+}

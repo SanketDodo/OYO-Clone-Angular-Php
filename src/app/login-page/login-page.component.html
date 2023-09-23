@@ -1,0 +1,92 @@
+<div class="wrapper">
+  <div class="container-fluid px-5">
+    <div class="row m-0 p-0 h-100">
+      <!-- ! Left side -->
+      <div class="col">
+        <div class="w-75">
+          <h1>There’s a smarter way to Kalamb Beach around</h1>
+          <h4>
+            Sign up with your phone number and get exclusive access to discounts
+            and savings on Kalamb Beach stays and with our many travel partners.
+          </h4>
+        </div>
+      </div>
+      <!-- ! Right side -->
+      <div class="col">
+        <div class="card">
+          <div class="card-top-msg">
+            <i class="bi bi-percent"></i>&nbsp;Sign up & Get ₹500 Kalamb Beach Money
+          </div>
+
+          <!-- ! Login Form -->
+          <div class="card-body" *ngIf="!signInForm_hide">
+            <h1>Login / Signup</h1>
+            <h4>Please enter your phone number to continue</h4>
+
+            <mat-form-field appearance="outline" class="mb-2">
+              <mat-label>Mobile number</mat-label>
+              <input matInput [(ngModel)]="mobile_no" type="number" />
+              <mat-hint *ngIf="mobile_no_error" class="text-danger">Mobile number is not valid</mat-hint>
+            </mat-form-field>
+
+            <!-- ! Sign in without password -->
+            <div *ngIf="!password_field_hide">
+              <button mat-flat-button color="primary" (click)="signIn()">
+                Verify Number
+              </button>
+              <h4>
+                Prefer to Sign in with password instead?
+                <a class="text-info" (click)="signInPassword()">Click here</a>
+              </h4>
+            </div>
+
+            <!-- ! Sign in with password -->
+            <div *ngIf="password_field_hide">
+              <mat-form-field appearance="outline">
+                <mat-label>Passcode</mat-label>
+                <input matInput type="password" />
+              </mat-form-field>
+
+              <button mat-flat-button color="primary">Verify Number</button>
+              <h4>
+                Prefer to Proceed with OTP instead?
+                <a class="text-info" (click)="signInWithoutPassword()">Click here</a>
+              </h4>
+            </div>
+          </div>
+
+          <!-- ! Signup Form -->
+          <div class="card-body" *ngIf="signInForm_hide">
+            <h1>Sign up</h1>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input [(ngModel)]="username" matInput type="text" required />
+              <mat-hint *ngIf="username_error" class="text-danger">Please enter your full name!</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input [(ngModel)]="email" matInput type="email" required />
+              <mat-hint *ngIf="email_error" class="text-danger">Please enter email address!</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="otp mb-3" appearance="outline">
+              <mat-label>Enter 4-digit OTP</mat-label>
+              <input [(ngModel)]="otp" matInput type="number" required max="4" />
+              <mat-hint *ngIf="otp_error" class="w-100 text-danger">Please enter valid OTP!</mat-hint>
+              <mat-hint *ngIf="display && display != '00:00'" class="w-100 text-end text-danger">Resend OTP
+                in : {{display}}</mat-hint>
+              <mat-hint *ngIf="display == '00:00'" class="resendOtpBtn"><a (click)="resendOtp()">Resend OTP</a></mat-hint>
+
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" (click)="signUp()">Signup</button>
+
+            <h4>Please enter your all details to continue</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

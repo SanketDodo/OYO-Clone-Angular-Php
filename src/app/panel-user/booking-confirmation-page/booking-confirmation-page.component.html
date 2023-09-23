@@ -1,0 +1,55 @@
+<div class="wrapper d-flex align-items-center h-100">
+    <div class="container">
+        <h1 id="heading">Great! Your stay is confirmed.</h1>
+        <div id="subHeading">You will soon receive an email confirmation on {{bookingData?.email}}</div>
+        <div className="card">
+            <div className="card-body">
+                <div className="row justify-content-between px-3">
+                    <div id="idTitle">
+                        Booking Id : {{bookingData?.booking_id}}
+                    </div>
+                    <div id="subHeading">Booked by {{bookingData?.username}} on {{bookingData?.createdAt | date : 'EEEE, MMMM d, y h:mm a'}}</div>
+                </div>
+                <hr class="my-3">
+                <div className="row px-3 m-0">
+                    <div id="priceHeading">Payment Details</div>
+                    <table class="table" id="table">
+                        <tbody>
+                            <tr>
+                                <td>Room Tariff</td>
+                                <td id="center">₹ {{bookingData?.rate}} X 1 Nights</td>
+                                <td id="right">₹ {{bookingData?.rate * 1}}</td>
+                            </tr>
+                            <tr>
+                                <td>Discount %</td>
+                                <td id="center">{{bookingData?.discount_percent}}% </td>
+                                <td id="right">- ₹ {{bookingData?.discounted_price}}</td>
+                            </tr>
+                            <!-- <tr>
+                                <td>Larry</td>
+                                <td id="center">the Bird</td>
+                                <td id="right">₹ 3042</td>
+                            </tr>
+                            <tr>
+                                <td>Larry</td>
+                                <td id="center">the Bird</td>
+                                <td id="right">₹ 3042</td>
+                            </tr>
+                            <tr>
+                                <td>Larry</td>
+                                <td id="center">the Bird</td>
+                                <td id="right">₹ 3042</td>
+                            </tr> -->
+                            <tr>
+                                <td id="total" colSpan="2">
+                                    Total Due(inclusive of all taxes)
+                                </td>
+                                <td id="cash">₹ {{bookingData?.final_bill}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

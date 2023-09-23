@@ -1,0 +1,15 @@
+
+<div class="datePicker" (click)="picker.open()">
+  <div>
+    {{ this.ApiServiceService.TODATE }} -
+    {{ this.ApiServiceService.FROMDATE }}
+  </div>
+  <mat-date-range-input [min]="todaysDate" class="flex-grow-0" [rangePicker]="picker">
+    <input matStartDate [(ngModel)]="this.ApiServiceService.toDate" disabled hidden
+      (dateInput)="this.ApiServiceService.onDateSelected()" />
+    <input matEndDate [(ngModel)]="this.ApiServiceService.fromDate" disabled hidden
+      (dateInput)="this.ApiServiceService.onDateSelected()" />
+  </mat-date-range-input>
+  <mat-datepicker-toggle disabled="false" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker disabled="false" #picker></mat-date-range-picker>
+</div>

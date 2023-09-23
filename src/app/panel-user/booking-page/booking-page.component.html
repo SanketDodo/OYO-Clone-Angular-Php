@@ -1,0 +1,330 @@
+<mat-toolbar>
+  <div class="flex-grow-0">
+    <img
+      style="cursor: pointer"
+      routerLink="/welcome-page"
+      width="200px"
+      src="../../../assets/images/kb_logo.png"
+      alt="logo"
+    />
+  </div>
+</mat-toolbar>
+
+<app-booking-shimmer *ngIf="bookingData.length == 0"></app-booking-shimmer>
+
+<div *ngIf="bookingData.length != 0" class="wrapper">
+  <div class="container">
+    <div class="d-flex justify-content-start align-items-center back-btn">
+      <h4 class="mb-0" routerLink="/view-details">
+        <i class="bi bi-chevron-left"></i>&nbsp; Modify your booking
+      </h4>
+    </div>
+    <div class="row p-0 gap-4">
+      <div class="col p-0 mb-5">
+        <div class="row m-0 p-0 gap-4">
+          <div class="col-12 p-0 note-card">
+            <div class="d-flex justify-content-center align-items-center">
+              <h4 class="mb-0">
+                🎉 Yay! you just saved ₹1080 on this booking!
+              </h4>
+            </div>
+          </div>
+
+          <div
+            *ngIf="!this.ApiServiceService.username && modify_card == false"
+            class="col-12 p-0 share-details-card"
+          >
+            <div class="d-flex align-items-center bg-light">
+              <i class="bi bi-1-square-fill"></i>
+              <h1 class="mb-0">Enter your details</h1>
+            </div>
+
+            <div class="d-flex align-items-center">
+              <p class="mb-0">
+                We will use these details to share your booking information
+              </p>
+            </div>
+
+            <div class="d-flex flex-column">
+              <div class="w-100 p-0 d-flex justify-content-between">
+                <mat-form-field class="w-100 pe-3" appearance="outline">
+                  <mat-label>Full Name</mat-label>
+                  <input [(ngModel)]="username" matInput type="text" required />
+                  <mat-hint *ngIf="username_error" class="text-danger"
+                    >Please enter your full name!</mat-hint
+                  >
+                </mat-form-field>
+
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Email Address</mat-label>
+                  <input [(ngModel)]="email" matInput type="email" required />
+                  <mat-hint *ngIf="email_error" class="text-danger"
+                    >Please enter email address!</mat-hint
+                  >
+                </mat-form-field>
+              </div>
+
+              <div class="w-100 p-0 d-flex justify-content-between">
+                <mat-form-field class="w-100 pe-3" appearance="outline">
+                  <mat-label>Mobile Number</mat-label>
+                  <input
+                    [(ngModel)]="mobile_no"
+                    matInput
+                    type="number"
+                    required
+                    [disabled]="!signIn_btn_disabled"
+                  />
+                  <mat-hint *ngIf="mobile_no_error" class="text-danger"
+                    >Please enter Mobile number!</mat-hint
+                  >
+                </mat-form-field>
+
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>OTP</mat-label>
+                  <input
+                    [(ngModel)]="otp"
+                    matInput
+                    type="number"
+                    required
+                    max="4"
+                    [disabled]="otp_btn_disabled"
+                  />
+                  <mat-hint *ngIf="otp_error" class="w-100 text-danger"
+                    >Please enter valid OTP!</mat-hint
+                  >
+                  <mat-hint
+                    *ngIf="display && display != '00:00'"
+                    class="w-100 text-end text-danger"
+                    >Resend OTP in : {{ display }}</mat-hint
+                  >
+                  <mat-hint *ngIf="display == '00:00'" class="resendOtpBtn"
+                    ><a (click)="resendOtp()">Resend OTP</a></mat-hint
+                  >
+                </mat-form-field>
+              </div>
+
+              <div class="w-100 mt-3 p-0 d-flex justify-content-end">
+                <button
+                  *ngIf="signIn_btn_disabled"
+                  (click)="signIn()"
+                  mat-ripple
+                >
+                  Send OTP
+                </button>
+                <button
+                  *ngIf="signup_btn_disabled"
+                  (click)="signUp()"
+                  mat-ripple
+                >
+                  Verify
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            *ngIf="this.ApiServiceService.username && !modify_card"
+            class="col-12 p-0 share-details-card-2"
+          >
+            <div class="d-flex align-items-center bg-light">
+              <i class="bi bi-1-square-fill"></i>
+              <h1 class="mb-0">Your details</h1>
+              <div class="ms-auto">
+                <button (click)="modify_user_details()" class="mode-btn">
+                  <i class="bi bi-pencil"></i>&nbsp; Modify
+                </button>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center">
+              <h2 class="flex-grow-1 ps-4">
+                {{ this.ApiServiceService.username }}
+              </h2>
+              <h2 class="flex-grow-1 ps-4">
+                {{ this.ApiServiceService.email }}
+              </h2>
+              <h2 class="flex-grow-1 ps-4">
+                {{ this.ApiServiceService.mobile }}
+              </h2>
+            </div>
+          </div>
+
+          <div
+            *ngIf="this.ApiServiceService.username && !modify_card"
+            class="col-12 p-0 payment-card"
+          >
+            <div class="d-flex align-items-center">
+              <i class="bi bi-2-square-fill"></i>
+              <h1 class="mb-0">Choose your payment method</h1>
+            </div>
+
+            <div
+              class="d-flex justify-content-start align-items-center bg-light"
+            >
+              <i class="bi bi-shield-check"></i>
+              <h2 class="mb-0">100% safe and secure payments</h2>
+            </div>
+
+            <mat-accordion>
+              <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <i class="bi bi-credit-card"></i>
+                    <label>Credit / Debit / ATM Card</label>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p class="text-danger">Currently not available</p>
+              </mat-expansion-panel>
+
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <i class="bi bi-coin"></i>
+                    <label>Pay Cash Later</label>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="d-flex justify-content-between">
+                  <label>Pay cash when you will check-In at hotel</label>
+                  <button
+                    (click)="bookThisRoom_dialog()"
+                    class="rateBtn"
+                    mat-ripple
+                  >
+                    Pay Now
+                  </button>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+
+          <div *ngIf="modify_card" class="col-12 p-0 share-details-card">
+            <div class="d-flex align-items-center bg-light">
+              <i class="bi bi-1-square-fill"></i>
+              <h1 class="mb-0">Modify your details</h1>
+            </div>
+
+            <div class="d-flex align-items-center">
+              <p class="mb-0">
+                We will use these details to share your booking information
+              </p>
+            </div>
+
+            <div class="d-flex flex-column">
+              <div class="w-100 p-0 d-flex justify-content-between">
+                <mat-form-field class="w-100 pe-3" appearance="outline">
+                  <mat-label>Full Name</mat-label>
+                  <input [(ngModel)]="username" matInput type="text" required />
+                  <mat-hint *ngIf="username_error" class="text-danger"
+                    >Please enter your full name!</mat-hint
+                  >
+                </mat-form-field>
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Email Address</mat-label>
+                  <input [(ngModel)]="email" matInput type="email" required />
+                  <mat-hint *ngIf="email_error" class="text-danger"
+                    >Please enter email address!</mat-hint
+                  >
+                </mat-form-field>
+              </div>
+
+              <div class="w-100 mt-3 p-0 d-flex justify-content-end">
+                <button
+                  class="cancel-btn me-4"
+                  (click)="cancel_modify()"
+                  mat-ripple
+                >
+                  cancel
+                </button>
+                <button (click)="modifyDetails()" mat-ripple>Modify</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ! RIGHT SIDE CARD -->
+      <div class="col col-md-5 col-lg-5 col-xl-5 p-0 mb-5">
+        <div class="receipt-card pb-4">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="ps-4 pt-4">
+              <h4 class="mb-0">{{ bookingData[0]?.hotel_name }}</h4>
+              <h5>{{ bookingData[0]?.address }}</h5>
+            </div>
+            <div class="pt-4 pe-4">
+              <img width="100px" src="../../../assets/images/bed.webp" alt="" />
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center px-4 rating-Box mb-2">
+            <button class="rateBtn">
+              <i class="bi bi-star-fill"></i>&nbsp;&nbsp;3.5
+            </button>
+            <span>&nbsp; (101 reviews) Very Good</span>
+          </div>
+
+          <div class="d-flex flex-column px-4 my-4">
+            <div class="d-flex flex-grow-0 d-flex align-items-center">
+              <i class="bi bi-calendar2-week"></i>
+              <span
+                >{{ this.ApiServiceService?.TODATE }} -
+                {{ this.ApiServiceService?.FROMDATE }}</span
+              ><small
+                >{{ this.ApiServiceService?.TOTALROOMS }} room,
+                {{ this.ApiServiceService?.TOTALGUEST }} Guests</small
+              >
+            </div>
+            <hr />
+            <div class="d-flex flex-grow-0 d-flex align-items-center">
+              <i class="bi bi-door-closed"></i
+              ><span>{{ bookingData[0]?.room_type_name }}</span>
+            </div>
+          </div>
+
+          <div
+            class="receipt-items d-flex justify-content-between align-items-center px-4"
+          >
+            <span
+              >Room price for {{ bookingData[0]?.package_name }}
+              <strong>X {{ this.ApiServiceService?.TOTALGUEST }}</strong>
+              Guests</span
+            >
+            <span>₹{{ bookingData[0]?.bill_amt }}</span>
+          </div>
+
+          <!-- <div class="receipt-items d-flex justify-content-between align-items-center px-4">
+            <span>Instant discount</span>
+            <span>₹2298</span>
+          </div> -->
+
+          <div
+            class="receipt-items d-flex justify-content-between align-items-center px-4"
+          >
+            <span
+              ><strong>{{ bookingData[0]?.discount }}%</strong> Coupon
+              Discount</span
+            >
+            <span>-₹{{ bookingData[0]?.discounted_price }}</span>
+          </div>
+
+          <!-- <div class="receipt-items d-flex justify-content-between align-items-center px-4">
+            <span>OYO Money Applied</span>
+            <span>-₹965</span>
+          </div> -->
+
+          <div class="px-4">
+            <hr class="my-3" style="border-style: dashed" />
+          </div>
+          <div
+            class="d-flex justify-content-between align-items-center px-4 mainRate"
+          >
+            <span
+              >Payable Amount<br /><small>inclusive of all taxes</small></span
+            >
+            <span>₹{{ bookingData[0]?.total_bill_amt }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

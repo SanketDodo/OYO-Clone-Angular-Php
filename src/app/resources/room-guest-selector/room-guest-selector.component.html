@@ -1,0 +1,27 @@
+<div class="d-flex align-items-center justify-content-end">
+  <i matRipple class="bi bi-x-circle" style="cursor: pointer; padding-right: 10px"></i>
+</div>
+<div class="add_Delete_Room">
+  <div class="d-flex align-items-center justify-content-between">
+    <h1>{{ ApiServiceService.TOTALROOMS }} Rooms</h1>
+    <h1>{{ ApiServiceService.TOTALGUEST }} Guests</h1>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div *ngFor="let item of ApiServiceService.ROOM_GUEST_ARRAY; let i = index">
+    <div class="d-flex align-items-center justify-content-around py-2">
+      <h2>Room&nbsp;&nbsp;{{ item.rooms }}</h2>
+      <h3 (click)="$event.stopPropagation()">
+        <span matRipple (click)="minusGuests(i)">-</span>
+        <h4>{{ item.guests }}</h4>
+        <span matRipple (click)="addGuests(i)">+</span>
+      </h3>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+
+  <div (click)="$event.stopPropagation()" class="d-flex align-items-center justify-content-between py-3">
+    <h5 matRipple (click)="delRoom()">Delete Room</h5>
+    <h5 matRipple (click)="addRoom()">Add Room</h5>
+  </div>
+</div>

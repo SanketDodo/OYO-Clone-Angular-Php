@@ -1,0 +1,10 @@
+// shimmer
+.placeholder-glow .placeholder {
+    animation: placeholder-glow 1.5s ease-in-out infinite;
+    border-radius: 4px;
+    margin: 8px 0px;
+}
+
+.placeholder {
+    background-color: rgb(209, 209, 209);
+}

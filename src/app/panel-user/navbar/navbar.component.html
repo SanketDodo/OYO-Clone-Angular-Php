@@ -1,0 +1,61 @@
+<mat-toolbar>
+  <div class="flex-grow-0">
+    <img style="cursor: pointer" routerLink="/welcome-page" src="../../../assets/images/kb_logo.png" alt="logo" />
+  </div>
+  <div class="flex-grow-1">
+    <!-- ! searcch-->
+    <div class="seach-bar">
+      <div class="flex-grow-1" style="width: 200px">
+        <mat-select class="matSelect" [(ngModel)]="this.ApiServiceService.LOCATION"
+          (ngModelChange)="this.onchangeLocation($event)">
+          <mat-option *ngFor="let loc of this.ApiServiceService.locationList" [value]="loc.city">{{ loc.city | titlecase
+            }}</mat-option>
+        </mat-select>
+
+      </div>
+
+      <div class="flex-grow-1" style="width: 200px">
+        <div class="d-flex align-items-center">
+          <app-date-selector style="width: 100%; cursor: pointer"></app-date-selector>
+        </div>
+      </div>
+
+      <div class="flex-grow-1">
+        <h4 class="mb-0" [matMenuTriggerFor]="menu">
+          {{ this.ApiServiceService.TOTALROOMS }} Room,
+          {{ this.ApiServiceService.TOTALGUEST }} Guests
+        </h4>
+        <mat-menu #menu="matMenu" yPosition="below" [hasBackdrop]="false">
+          <app-room-guest-selector (totRooms)="totRooms($event)"></app-room-guest-selector>
+        </mat-menu>
+      </div>
+    </div>
+    <!-- ! searcch-->
+  </div>
+  <div class="flex-grow-0 ps-2" style="width: 210px">
+    <button *ngIf="!this.ApiServiceService.username" matRipple class="login-btn" routerLink="/login-page">
+      <i class="bi bi-person-circle"></i> Login / Signup
+    </button>
+
+    <button class="logged-btn" *ngIf="this.ApiServiceService.username" mat-button [matMenuTriggerFor]="profileMenu">
+      <i class="bi bi-person-circle"></i> Welcome,
+      {{ this.ApiServiceService.username }}
+    </button>
+    <mat-menu #profileMenu>
+      <div routerLink="/booking-history" matRipple class="menu_item d-flex align-items-center">
+        <i class="bi bi-journal-check"></i>
+        <span>Booking History</span>
+      </div>
+      <hr style="color: rgb(160, 160, 160)" />
+      <div routerLink="/profile" matRipple class="menu_item d-flex align-items-center">
+        <i class="bi bi-person"></i>
+        <span>My Profile</span>
+      </div>
+      <hr style="color: rgb(160, 160, 160)" />
+      <div matRipple (click)="this.ApiServiceService.delCookie()" class="menu_item d-flex align-items-center">
+        <i class="bi bi-box-arrow-left"></i>
+        <span>Logout</span>
+      </div>
+    </mat-menu>
+  </div>
+</mat-toolbar>

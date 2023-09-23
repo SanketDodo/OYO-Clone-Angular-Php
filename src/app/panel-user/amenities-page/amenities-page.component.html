@@ -1,0 +1,293 @@
+<app-navbar (totRoomsAndGuest)="getChangesFromnavbar($event)"></app-navbar>
+
+<app-view-shimmer *ngIf="hotel_data.length == 0"></app-view-shimmer>
+
+<div *ngIf="hotel_data.length != 0">
+  <swiper
+    [slidesPerView]="2.5"
+    [spaceBetween]="1"
+    [loop]="true"
+    [autoplay]="true"
+    [speed]="1000"
+    (swiper)="onSwiper($event)"
+    (slideChange)="onSlideChange()"
+  >
+    <ng-template swiperSlide *ngFor="let img of hotel_data[0]?.slider_imgs">
+      <img width="100%;" height="400px" [src]="img" alt="" />
+    </ng-template>
+
+    <!-- <ng-template swiperSlide>
+      <img width="100%" src="../../../assets/images/bed.webp" alt="" />
+    </ng-template>
+    <ng-template swiperSlide>
+      <img width="100%" src="../../../assets/images/bed.webp" alt="" />
+    </ng-template>
+    <ng-template swiperSlide>
+      <img width="100%" src="../../../assets/images/bed.webp" alt="" />
+    </ng-template>
+    <ng-template swiperSlide>
+      <img width="100%" src="../../../assets/images/bed.webp" alt=""
+    /></ng-template> -->
+  </swiper>
+
+  <!-- [pagination]="{ clickable: true }" -->
+
+  <div class="wrapper">
+    <div class="container">
+      <div class="row mt-4 p-0">
+
+        <div class="col col-lg-8 col-xl-8 p-0">
+          <div class="d-flex flex-column">
+            <div class="flex-grow-0">
+              <div class="d-flex">
+                <div class="flex-grow-1 hotel-name">
+                  <h1 class="mb-2">
+                    {{ hotel_data[0]?.hotel_name }}
+                  </h1>
+                  <small>{{ hotel_data[0]?.address }}</small>
+                </div>
+                <div class="flex-grow-0 rating-box">
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center border"
+                  >
+                    <div class="flex-grow-1">
+                      3.5 <i class="bi bi-star-fill"></i>
+                    </div>
+                    <div class="flex-grow-1">1234 Ratings</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex-grow-0 flagship-box my-2">
+              <div>FLAGSHIP</div>
+            </div>
+
+            <div class="flex-grow-0 Delightful-rating-box my-2">
+              <div>
+                <strong>5.0 Check-in rating ></strong> Delightful experience
+              </div>
+            </div>
+
+            <section class="my-4">
+              <h1>Description</h1>
+              <p>{{ hotel_data[0]?.description }}</p>
+            </section>
+
+            <section class="amenities mb-4">
+              <h1>Hotel Amenities</h1>
+              <div class="row m-0 p-0 row-cols-3">
+                <div
+                  *ngFor="let hf of hotel_data[0]?.hotel_facilities"
+                  class="col d-flex align-items-center mb-3"
+                >
+                  <img [src]="hf.icon" alt="hf.name" />
+                  <!-- <i class="bi bi-wifi"></i> -->
+                  <h3>{{ hf.name }}</h3>
+                </div>
+              </div>
+            </section>
+
+            <section class="chooseYourRoom mb-4">
+              <h1>Room Amenities</h1>
+              <div class="row m-0 p-0 row-cols-1">
+                <div class="col-12">
+                  <div
+                    *ngFor="let cyr of hotel_data[0]?.choose_your_room"
+                    class="roomTypeCard mb-4"
+                  >
+                    <div
+                      [ngClass]="
+                        this.RoomTypeName == cyr?.room_type ? 'show' : 'hide'
+                      "
+                      class="top"
+                    >
+                      <i class="bi bi-check2-circle"></i>&nbsp;Selected Room
+                      Type
+                    </div>
+                    <div
+                      class="middle d-flex justify-content-between align-items-center px-4 py-2"
+                    >
+                      <h3>{{ cyr?.room_type }}</h3>
+                    </div>
+
+                    <div
+                      *ngIf="cyr?.room_facilities.length != 0"
+                      class="row row-cols-4 gap-2 p-3"
+                    >
+                      <div
+                        *ngFor="let rf of cyr?.room_facilities"
+                        class="col d-flex align-items-center"
+                      >
+                        <img [src]="rf.icon" alt="" />
+                        <h5>{{ rf.name | uppercase }}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- <section class="ratingsReviews mb-4">
+              <h1>Ratings and reviews</h1>
+              <div class="d-flex"></div>
+            </section>
+
+            <section class="hotelPolicies mb-4">
+              <h1>Hotel policies</h1>
+              <div class="d-flex"></div>
+            </section> -->
+
+
+          </div>
+        </div>
+
+        <!-- ! Right Side -->
+        <div class="col col-lg-4 col-xl-4 p-0">
+          <div class="editable-receipt-card">
+            <div class="topBox">
+              <span style="padding-left: 10px; padding-right: 8px">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                >
+                  <g fill="none" fill-rule="nonzero">
+                    <path
+                      fill="white"
+                      d="M8.113.468L9.897.014a.467.467 0 0 1 .44.118l1.318 1.284a.467.467 0 0 0 .2.115l1.771.497a.467.467 0 0 1 .323.323l.498 1.769c.021.075.06.143.115.2l1.285 1.314a.467.467 0 0 1 .119.442l-.455 1.78a.466.466 0 0 0 0 .23l.455 1.78a.467.467 0 0 1-.119.442l-1.284 1.315a.467.467 0 0 0-.116.2l-.498 1.768a.467.467 0 0 1-.323.323l-1.772.498a.466.466 0 0 0-.199.114l-1.318 1.284a.466.466 0 0 1-.44.118l-1.784-.454a.467.467 0 0 0-.23 0l-1.784.454a.467.467 0 0 1-.44-.118L4.34 14.527a.467.467 0 0 0-.2-.115l-1.771-.498a.466.466 0 0 1-.323-.323l-.498-1.768a.466.466 0 0 0-.116-.2L.15 10.308a.466.466 0 0 1-.119-.441l.455-1.78a.466.466 0 0 0 0-.231L.03 6.076a.467.467 0 0 1 .119-.442L1.434 4.32a.467.467 0 0 0 .115-.2l.498-1.768a.467.467 0 0 1 .323-.323l1.772-.497a.466.466 0 0 0 .2-.115L5.658.132a.466.466 0 0 1 .44-.118l1.784.454c.075.02.155.02.23 0z"
+                    ></path>
+                    <path
+                      fill="#DA315C"
+                      d="M7.333 6c0 .735-.598 1.333-1.333 1.333A1.335 1.335 0 0 1 4.667 6c0-.735.598-1.333 1.333-1.333S7.333 5.265 7.333 6zM5.536 6a.464.464 0 1 0 .929-.001.464.464 0 0 0-.929.001zM10 8.667c.735 0 1.333.598 1.333 1.333s-.598 1.333-1.333 1.333A1.335 1.335 0 0 1 8.667 10c0-.735.598-1.333 1.333-1.333zm0 1.797a.464.464 0 1 0-.001-.929.464.464 0 0 0 .001.929zm.534-4.998a.455.455 0 0 1 0 .643l-4.425 4.425a.453.453 0 0 1-.643 0 .454.454 0 0 1 0-.643l4.425-4.425a.454.454 0 0 1 .643 0z"
+                    ></path>
+                  </g>
+                </svg>
+              </span>
+
+              LOGIN NOW TO GET UPTO 15% LOWER PRICES
+            </div>
+
+            <div class="price-box">
+              <div class="d-flex align-items-center">
+                <span
+                  ><i class="bi bi-currency-rupee"></i
+                  >{{ TOTAL_AMOUNT }}/-</span
+                >
+                <span
+                  ><s>
+                    <i class="bi bi-currency-rupee"></i>{{ AMOUNT }}/-</s
+                  ></span
+                >
+                <span>{{ DISCOUNT }}% Off</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <p>Inclusive all taxses</p>
+              </div>
+            </div>
+
+            <div class="px-4 pb-2">
+              <div class="edit-date-box mb-3">
+                <app-date-selector style="width: 100%"></app-date-selector>
+              </div>
+
+              <div class="shadow-box mb-3">
+                <h4 class="mb-0" [matMenuTriggerFor]="menu">
+                  {{ this.ApiServiceService.TOTALROOMS }} Room,
+                  {{ this.ApiServiceService.TOTALGUEST }} Guests
+                </h4>
+                <mat-menu
+                  #menu="matMenu"
+                  yPosition="below"
+                  [hasBackdrop]="false"
+                >
+                  <app-room-guest-selector
+                    (totRooms)="totRooms($event)"
+                  ></app-room-guest-selector>
+                </mat-menu>
+              </div>
+
+              <div class="shadow-box mb-3">
+                <mat-select
+                  class="matSelect"
+                  [(ngModel)]="select_room_type"
+                  (ngModelChange)="this.onchangeRoomType($event)"
+                >
+                  <mat-option
+                    *ngFor="let room of ROOM_TYPE_ARRAY"
+                    [value]="room.id"
+                    (click)="setRoomType(room)"
+                    >{{ room.room_type }}</mat-option
+                  >
+                </mat-select>
+              </div>
+
+              <div class="shadow-box mb-4">
+                <mat-select
+                  class="matSelect"
+                  [(ngModel)]="select_package_type"
+                  (ngModelChange)="this.onchangePackageType($event)"
+                >
+                  <mat-option
+                    *ngFor="let pack of PACKAGES_ARRAY"
+                    [value]="pack.id"
+                    (click)="setPackageType(pack)"
+                    >{{ pack.package_type }}</mat-option
+                  >
+                </mat-select>
+              </div>
+
+              <!-- <div class="d-flex justify-content-between basic-details mt-4 mb-3">
+              <span lazyload="true" class="c-k008qs"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                  viewBox="0 0 16 16">
+                  <g fill="none">
+                    <path fill="#F5A623"
+                      d="M8.113.468L9.897.014a.467.467 0 01.44.118l1.318 1.284a.467.467 0 00.2.115l1.771.497a.467.467 0 01.323.323l.498 1.769c.021.075.06.143.115.2l1.285 1.314a.467.467 0 01.119.442l-.455 1.78a.466.466 0 000 .23l.455 1.78a.467.467 0 01-.119.442l-1.284 1.315a.467.467 0 00-.116.2l-.498 1.768a.467.467 0 01-.323.323l-1.772.498a.466.466 0 00-.199.114l-1.318 1.284a.466.466 0 01-.44.118l-1.784-.454a.467.467 0 00-.23 0l-1.784.454a.467.467 0 01-.44-.118L4.34 14.527a.467.467 0 00-.2-.115l-1.771-.498a.466.466 0 01-.323-.323l-.498-1.768a.466.466 0 00-.116-.2L.15 10.308a.466.466 0 01-.119-.441l.455-1.78a.466.466 0 000-.231L.03 6.076a.467.467 0 01.119-.442L1.434 4.32a.467.467 0 00.115-.2l.498-1.768a.467.467 0 01.323-.323l1.772-.497a.466.466 0 00.2-.115L5.658.132a.466.466 0 01.44-.118l1.784.454c.075.02.155.02.23 0z">
+                    </path>
+                    <path fill="white"
+                      d="M7.333 6c0-.735-.598-1.333-1.333-1.333S4.667 5.265 4.667 6 5.265 7.333 6 7.333 7.333 6.735 7.333 6zM5.536 6a.464.464 0 11.929.001A.464.464 0 015.536 6zM10 8.667c-.735 0-1.333.598-1.333 1.333s.598 1.333 1.333 1.333 1.333-.598 1.333-1.333S10.735 8.667 10 8.667zm0 1.797a.464.464 0 11.001-.929.464.464 0 01-.001.929zm.534-4.998a.454.454 0 00-.643 0L5.466 9.891a.454.454 0 10.643.643l4.425-4.425a.455.455 0 000-.643z">
+                    </path>
+                  </g>
+                </svg></span>
+              <h4>OYOFESTIVE50 coupon applied</h4>
+              <h3>15%</h3>
+              <mat-checkbox></mat-checkbox>
+            </div> -->
+              <!-- <div class="d-flex justify-content-between basic-details mb-4">
+              <h4>Save 5% with Wizard membership</h4>
+              <h3>15%</h3>
+              <mat-checkbox></mat-checkbox>
+            </div> -->
+
+              <hr class="dash-border" />
+
+              <div class="d-flex justify-content-between basic-details mt-4">
+                <h4>Your savings</h4>
+                <h3>
+                  <i class="bi bi-currency-rupee"></i> {{ DISCOUNTED_Price }}/-
+                </h3>
+              </div>
+              <div class="d-flex justify-content-between basic-details mb-4">
+                <h4>Total price <small>(incl. of all taxes)</small></h4>
+                <h3>
+                  <i class="bi bi-currency-rupee"></i> {{ TOTAL_AMOUNT }}/-
+                </h3>
+              </div>
+
+              <div class="d-flex justify-content-between basic-details mb-4">
+                <a rel="noopener noreferrer">
+                  <button (click)="continueToBook()" matRipple [disabled]="continueToBook_disabled">
+                    Continue to Book
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

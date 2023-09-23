@@ -1,0 +1,221 @@
+<mat-toolbar>
+  <div class="flex-grow-0">
+    <img
+      style="cursor: pointer; margin-left: 45px"
+      routerLink="/welcome-page"
+      width="200px"
+      src="../../../assets/images/kb_logo.png"
+      alt="logo"
+    />
+  </div>
+  <div class="flex-grow-1">
+    <!-- searcch bar -->
+  </div>
+  <div matRipple class="flex-grow-0">
+    <button
+      *ngIf="!this.ApiServiceService.username"
+      matRipple
+      class="login-btn"
+      routerLink="/login-page"
+    >
+      <i class="bi bi-person-exclamation"></i>Login / Signup
+    </button>
+
+    <button
+      class="logged-btn"
+      *ngIf="this.ApiServiceService.username"
+      mat-button
+      [matMenuTriggerFor]="profileMenu"
+    >
+      <i class="bi bi-person-circle"></i> Welcome,
+      {{ this.ApiServiceService.username }}
+    </button>
+
+    <mat-menu #profileMenu>
+      <div
+        routerLink="/booking-history"
+        matRipple
+        class="menu_item d-flex align-items-center"
+      >
+        <i class="bi bi-journal-check"></i>
+        <span>Booking History</span>
+      </div>
+      <hr style="color: rgb(160, 160, 160)" />
+
+      <div
+        routerLink="/profile"
+        matRipple
+        class="menu_item d-flex align-items-center"
+      >
+        <i class="bi bi-person"></i>
+        <span>My Profile</span>
+      </div>
+      <hr style="color: rgb(160, 160, 160)" />
+
+      <div
+        matRipple
+        (click)="this.ApiServiceService.delCookie()"
+        class="menu_item d-flex align-items-center"
+      >
+        <i class="bi bi-box-arrow-left"></i>
+        <span>Logout</span>
+      </div>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+
+<section class="banner">
+  <img class="banner-img" src="../../assets/images/banner.svg" alt="" />
+  <img class="banner-img-2" src="../../assets/images/banner.svg" alt="" />
+  <div class="container-fluid">
+    <h2>Over 157,000 hotels and homes across 35 countries</h2>
+    <div class="seach-bar">
+      <div class="flex-grow-1">
+        <mat-select
+          class="matSelect"
+          [(ngModel)]="this.ApiServiceService.LOCATION"
+          (ngModelChange)="this.onchangeLocation($event)"
+        >
+          <mat-option
+            *ngFor="let loc of this.ApiServiceService.locationList"
+            [value]="loc.city"
+            >{{ loc.city | titlecase }}</mat-option
+          >
+        </mat-select>
+      </div>
+      <div class="flex-grow-1">
+        <div class="datePicker" (click)="picker.open()">
+          <div>
+            <div>
+              {{ this.ApiServiceService.TODATE }} -
+              {{ this.ApiServiceService.FROMDATE }}
+            </div>
+          </div>
+          <mat-date-range-input class="flex-grow-0" [rangePicker]="picker">
+            <input
+              matStartDate
+              [(ngModel)]="this.ApiServiceService.toDate"
+              disabled
+              hidden
+              (dateInput)="onDateSelected()"
+            />
+            <input
+              matEndDate
+              [(ngModel)]="this.ApiServiceService.fromDate"
+              disabled
+              hidden
+              (dateInput)="onDateSelected()"
+            />
+          </mat-date-range-input>
+          <mat-datepicker-toggle
+            disabled="false"
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker
+            disabled="false"
+            #picker
+          ></mat-date-range-picker>
+        </div>
+      </div>
+      <div class="flex-grow-1">
+        <h4 class="mb-0" [matMenuTriggerFor]="menu">
+          {{ this.ApiServiceService.TOTALROOMS }} Room,
+          {{ this.ApiServiceService.TOTALGUEST }} Guests
+        </h4>
+        <mat-menu #menu="matMenu" yPosition="below" [hasBackdrop]="false">
+          <app-room-guest-selector
+            (totRooms)="totRooms($event)"
+            (totGuests)="totGuests($event)"
+          ></app-room-guest-selector>
+        </mat-menu>
+      </div>
+      <div class="flex-grow-1">
+        <button matRipple routerLink="/hotel-details">Search</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="p-5">
+  <div class="row m-0 row-cols-3">
+    <div *ngFor="let detail of hotelDetailsArray" class="col">
+      <div class="cardCss">
+        <div>
+          <swiper
+            [slidesPerView]="1"
+            [spaceBetween]="0"
+            [loop]="true"
+            [autoplay]="true"
+            [speed]="1000"
+            (swiper)="onSwiper($event)"
+            (slideChange)="onSlideChange()"
+          >
+            <ng-template swiperSlide>
+              <img
+                width="100%"
+                height="200px"
+                src="../../assets/images/bed.webp"
+                alt=""
+              />
+            </ng-template>
+            <ng-template swiperSlide>
+              <img
+                width="100%"
+                height="200px"
+                src="../../assets/images/h22.webp"
+                alt=""
+              />
+            </ng-template>
+          </swiper>
+        </div>
+        <!-- ! details side -->
+        <div class="card-details">
+          <h2 class="d-inline-block text-truncate">
+            {{ detail.hotelName }}
+          </h2>
+          <h5>{{ detail.address }}</h5>
+
+          <div class="d-flex align-items-center rating-Box mb-2">
+            <button class="rateBtn">
+              <i class="bi bi-star-fill"></i>&nbsp;&nbsp;4.5
+            </button>
+            <span>&nbsp; ({{ detail.reviews }} reviews) Very Good</span>
+          </div>
+
+          <div class="d-flex align-items-center facility-Box mb-2">
+            <span><i class="bi bi-car-front"></i> Parking Facility</span>
+            <span><i class="bi bi-wifi"></i> Free WiFi</span>
+            <span>+ 15 more</span>
+          </div>
+
+          <div class="d-flex flex-column my-3">
+            <div class="flex-grow-0">
+              <div class="d-flex align-items-center price-box">
+                <span
+                  ><i class="bi bi-currency-rupee"></i
+                  >{{ detail.rate }} /-</span
+                >
+                <span
+                  ><s><i class="bi bi-currency-rupee"></i>1350/-</s></span
+                >
+                <span>{{ detail.discount }}% Off </span>
+              </div>
+            </div>
+            <div class="flex-grow-0">
+              <small style="font-size: 11px; opacity: 0.9"
+                >per room per night</small
+              >
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end align-items-center action-btn">
+            <button matRipple (click)="openBookingPage()">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

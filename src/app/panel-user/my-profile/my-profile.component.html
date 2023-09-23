@@ -1,0 +1,165 @@
+<mat-toolbar>
+  <div class="flex-grow-0">
+    <img
+      style="cursor: pointer; margin-left: 45px"
+      routerLink="/welcome-page"
+      width="200px"
+      src="../../../assets/images/kb_logo.png"
+      alt="logo"
+    />
+  </div>
+  <div class="flex-grow-1">
+    <!-- searcch bar -->
+  </div>
+  <div matRipple class="flex-grow-0">
+    <button
+      class="logged-btn"
+      *ngIf="this.ApiServiceService.username"
+      mat-button
+      [matMenuTriggerFor]="profileMenu"
+    >
+      <i class="bi bi-person-circle"></i> Welcome,
+      {{ this.ApiServiceService.username }}
+    </button>
+    <mat-menu #profileMenu>
+      <div
+        routerLink="/booking-history"
+        matRipple
+        class="menu_item d-flex align-items-center"
+      >
+        <i class="bi bi-journal-check"></i>
+        <span>Booking History</span>
+      </div>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+
+<div class="wrapper vh-100">
+  <div class="container">
+    <div class="row row-cols-2 m-0 pt-5">
+      <div class="col">
+        <div class="common_card">
+          <div class="d-flex align-items-center pt-4 pb-3">
+            <i class="bi bi-pencil"></i>
+            <h3 class="ps-2">Edit Details</h3>
+            <div class="ms-auto"></div>
+          </div>
+
+          <div class="d-flex flex-column">
+            <div class="w-100 pt-4">
+              <mat-form-field class="w-100 mb-2" appearance="outline">
+                <mat-label>Full Name</mat-label>
+                <input
+                  [(ngModel)]="username"
+                  matInput
+                  type="text"
+                  required
+                  [disabled]="feilds_disabled"
+                />
+                <mat-hint *ngIf="username_error" class="text-danger"
+                  >Please enter your full name!</mat-hint
+                >
+              </mat-form-field>
+
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Email Address</mat-label>
+                <input
+                  [(ngModel)]="email"
+                  matInput
+                  type="email"
+                  required
+                  [disabled]="feilds_disabled"
+                />
+                <mat-hint *ngIf="email_error" class="text-danger"
+                  >Please enter email address!</mat-hint
+                >
+              </mat-form-field>
+            </div>
+
+            <div class="w-100 mt-3 p-0 d-flex justify-content-end">
+              <button
+                *ngIf="feilds_disabled"
+                class="btn"
+                (click)="edit()"
+                mat-ripple
+              >
+                Edit
+              </button>
+              <button
+                *ngIf="!feilds_disabled"
+                class="cancel-btn me-4"
+                (click)="cancel()"
+                mat-ripple
+              >
+                cancel
+              </button>
+              <button
+                *ngIf="!feilds_disabled"
+                class="btn"
+                (click)="modifyDetails()"
+                mat-ripple
+              >
+                Modify
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="common_card">
+          <div class="d-flex align-items-center pt-4 pb-3">
+            <i class="bi bi-pencil"></i>
+            <h3 class="ps-2">Change Password</h3>
+            <div class="ms-auto"></div>
+          </div>
+
+          <div class="d-flex flex-column">
+            <div class="w-100 pt-4">
+              <mat-form-field class="w-100 mb-2" appearance="outline">
+                <mat-label>New Password</mat-label>
+                <input
+                  [(ngModel)]="new_pass"
+                  ngDefaultControl
+                  matInput
+                  type="text"
+                  required
+                />
+                <mat-hint *ngIf="new_pass_error" class="text-danger"
+                  >Please enter new password!</mat-hint
+                >
+              </mat-form-field>
+
+              <mat-form-field class="w-100 mb-2" appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input
+                  [(ngModel)]="confirm_pass"
+                  ngDefaultControl
+                  matInput
+                  [type]="hide2 ? 'password' : 'text'"
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide2 = !hide2"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide2"
+                >
+                  <i class="bi {{ hide2 ? 'bi-eye-slash' : 'bi-eye' }}"></i>
+                </button>
+                <mat-hint *ngIf="confirm_pass_error" class="text-danger">Please enter confirm password!</mat-hint>
+                <mat-hint *ngIf="not_match_error" class="text-danger">Password does not match!</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <div class="w-100 mt-3 p-0 d-flex justify-content-end">
+              <button class="btn" (click)="updatePassword()" mat-ripple>
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

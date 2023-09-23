@@ -1,0 +1,58 @@
+.add_Delete_Room {
+  padding: 0px 24px;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 0px;
+  }
+
+  h1 {
+    font-family: semibold-font;
+    font-size: 14px;
+  }
+
+  h2,
+  h3 {
+    font-family: light-font;
+    font-size: 14px;
+  }
+
+  h2 {
+    width: 120px;
+  }
+
+  h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #fafafa;
+      margin-right: 10px;
+      border-radius: 2px;
+      box-shadow: 1px 1px 3px -1px #989898;
+    }
+
+    span:last-child {
+      margin-left: 10px;
+      margin-right: 0px;
+    }
+  }
+
+  h5 {
+    font-family: "semibold-font";
+    font-size: 13px;
+    cursor: pointer;
+    opacity: 1;
+  }
+}

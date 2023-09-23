@@ -1,0 +1,198 @@
+<app-navbar
+  (totRoomsAndGuest)="getChangesFromnavbar($event)"
+  (location)="gettingLocation($event)"
+></app-navbar>
+
+<app-list-shimmer *ngIf="load_shimmer"></app-list-shimmer>
+
+<div *ngIf="!load_shimmer" class="wrapper">
+  <div class="container-fluid">
+    <div class="row m-0 p-0 row-cols-2">
+      <div class="col-12 col-md-3 col-lg-3 p-0 border-end">
+        <div class="filter-box">
+          <div class="d-flex justify-content-between align-items-center">
+            <h1>Filters</h1>
+            <small class="text-danger">Clear All</small>
+          </div>
+          <small>Popular locations in</small>
+          <hr />
+          <div class="mb-5">
+            <small>Price</small>
+            <div>
+              <ngx-slider
+                (userChangeEnd)="onChangesPrice($event)"
+                [(value)]="value"
+                [(highValue)]="highValue"
+                [options]="options"
+              ></ngx-slider>
+            </div>
+          </div>
+
+          <hr />
+
+          <div>
+            <small>Hotel Facilities</small>
+
+            <section class="d-flex flex-column mt-2">
+              <mat-checkbox
+                *ngFor="let facility of HOTEL_FACILITY_ARRAY"
+                (change)="getFacilityCheckBoxValue($event, facility)"
+                >{{ facility.name }}</mat-checkbox
+              >
+            </section>
+          </div>
+
+          <hr />
+
+          <div>
+            <small>Check-in features</small>
+            <section class="d-flex flex-column mt-2">
+              <mat-checkbox>Pay at hotel</mat-checkbox>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-9 col-lg-9 p-0">
+        <div class="px-4">
+          <div class="d-flex align-items-center sort-bar">
+            <div class="flex-grow-1">
+              <h2>
+                {{ this.SEARCHED_FOUND }} Kalamb Beach's hotels in
+                {{ this.ApiServiceService.LOCATION }}
+              </h2>
+            </div>
+            <div class="flex-grow-0">
+              <mat-form-field class="mat-select-class" appearance="outline">
+                <mat-label>Sort by</mat-label>
+                <mat-select
+                  [(ngModel)]="select_sortBy"
+                  (ngModelChange)="this.onchangeSortBy($event)"
+                >
+                  <mat-option value="Popularity">Popularity</mat-option>
+                  <mat-option value="LowtoHigh">Low to High</mat-option>
+                  <mat-option value="HightoLow">High to Low</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <hr class="mb-4" />
+
+          <div *ngFor="let detail of HOTELDATA_OBSER | async">
+            <div class="row m-0">
+              <div class="col-12 col-md-12 col-lg-4 p-0">
+                <div
+                  [ngClass]="
+                    detail?.rooms_data?.length == 0
+                      ? 'grayscle-1'
+                      : 'grayscle-0'
+                  "
+                >
+                  <swiper
+                    [slidesPerView]="1"
+                    [spaceBetween]="0"
+                    [loop]="true"
+                    [autoplay]="true"
+                    [speed]="1000"
+                    (swiper)="onSwiper($event)"
+                    (slideChange)="onSlideChange()"
+                  >
+                    <ng-template swiperSlide *ngFor="let im of detail?.images">
+                      <img [src]="im.img" class="d-block imgOfCard" alt="..." />
+                    </ng-template>
+
+                    <!-- <ng-template swiperSlide>
+                      <img
+                        src="../../../assets/images/bed.webp"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </ng-template> -->
+                  </swiper>
+                </div>
+              </div>
+              <!-- ! details side -->
+              <div class="col-12 col-md-12 col-lg-8 hotel-details">
+                <div class="d-flex flex-column h-100">
+                  <div class="flex-grow-1">
+                    <h2 class="d-inline-block text-truncate">
+                      {{ detail.hotel_name }}
+                    </h2>
+                    <h5>{{ detail.address }}</h5>
+
+                    <div class="d-flex align-items-center rating-Box mb-2">
+                      <button class="rateBtn">
+                        <i class="bi bi-star-fill"></i>&nbsp;&nbsp;4.5
+                      </button>
+                      <span
+                        >&nbsp; ({{ detail.reviews }} reviews) Very Good</span
+                      >
+                    </div>
+
+                    <div class="d-flex align-items-center facility-Box mb-2">
+                      <div *ngFor="let fac of detail.facilities; let i = index">
+                        <span class="d-flex align-items-center" *ngIf="i < 3">
+                          <img [src]="fac.icon" alt="" />
+                          {{ fac.name }}</span
+                        >
+                      </div>
+                      <span *ngIf="detail.facilities.length > 3"
+                        >+{{ detail.facilities.length - 3 }} more</span
+                      >
+                    </div>
+                  </div>
+                  <div class="flex-grow-0">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-grow-0">
+                        <div class="d-flex flex-column">
+                          <div class="flex-grow-0">
+                            <div class="d-flex align-items-center price-box">
+                              <span
+                                ><i class="bi bi-currency-rupee"></i
+                                >{{ detail.min_rate }} /-</span
+                              >
+                              <span
+                                ><s>
+                                  <i class="bi bi-currency-rupee"></i
+                                  >{{ detail.min_rate }}/-</s
+                                ></span>
+                              <span>{{ detail.discount }}% Off </span>
+                            </div>
+                          </div>
+                          <div class="flex-grow-0">
+                            <small style="font-size: 11px; opacity: 0.9"
+                              >start from</small
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <div
+                          class="d-flex justify-content-end align-items-center action-btn"
+                        >
+                          <!-- target="_blank" -->
+                          <a (click)="openViewDetails(detail.id)">
+                            <button matRipple>View Details</button>
+                          </a>
+                          <button matRipple (click)="openBookingPage(detail)">
+                            Book Now
+                          </button>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+          </div>
+
+          <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

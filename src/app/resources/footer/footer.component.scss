@@ -1,0 +1,56 @@
+.footer {
+  position: relative;
+  background: #6d787d !important;
+  color: white;
+
+  .footer-first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 24px;
+
+    h1 {
+      font-family: "bold-font";
+      font-size: 34px;
+      margin: 0;
+      font-weight: bolder;
+    }
+
+    h2 {
+      font-family: "bold-font";
+      font-size: 19px;
+      margin: 0;
+      font-weight: bolder;
+    }
+
+    .login-btn {
+      opacity: 0.9;
+      width: 200px;
+      text-align: center;
+      padding: 8px 0px;
+      font-family: semibold-font;
+      font-size: 13px;
+      border-radius: 6px;
+      background: white;
+      color: #1c1c1c;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .third-child {
+    .row .col {
+      font-family: medium-font;
+      font-size: 16px !important;
+      padding: 10px;
+    }
+
+    .row .col-12 {
+      font-family: bold-font;
+      font-size: 22px !important;
+      padding: 10px;
+    }
+  }
+}

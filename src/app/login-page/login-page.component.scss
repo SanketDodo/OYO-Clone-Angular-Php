@@ -1,0 +1,149 @@
+.wrapper {
+  background-image: url(../../assets/images/background_img.webp);
+  width: 100%;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container-fluid {
+    height: 100vh;
+    background: #0000004d;
+
+    .col:nth-child(1) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      h1 {
+        font-family: bold-font;
+        font-size: 55px;
+        opacity: 0.9;
+        margin: 10px 0px 5px 0px;
+        color: white;
+        line-height: 1.2;
+      }
+
+      h4 {
+        font-family: medium-font;
+        font-size: 16px;
+        margin-bottom: 12px;
+        opacity: 0.9;
+        color: white;
+      }
+    }
+
+    .col:nth-child(2) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .card {
+        width: 80%;
+        border: none;
+
+        .card-top-msg {
+          display: flex;
+          align-items: center;
+          background: red;
+          color: white;
+          font-family: semibold-font;
+          padding: 10px 20px;
+        }
+
+        .card-body {
+          padding: 40px;
+
+          h1 {
+            font-family: bold-font;
+            font-size: 32px;
+            opacity: 0.9;
+            margin: 10px 0px 35px 0px;
+          }
+
+          h4 {
+            font-family: medium-font;
+            font-size: 16px;
+            margin-bottom: 12px;
+            opacity: 0.9;
+          }
+
+          button {
+            width: 100%;
+            font-family: "bold-font", sans-serif !important;
+            font-size: 20px !important;
+            color: white;
+            margin-bottom: 12px;
+            padding: 10px 0px;
+          }
+
+          .mat-icon-button {
+            background: transparent !important;
+          }
+
+          input[type="text"],
+          input[type="email"] {
+            letter-spacing: 0px !important;
+            text-align: start !important;
+            font-size: 18px !important;
+          }
+
+          input[type="number"] {
+            font-size: 26px;
+            letter-spacing: 15px;
+            text-align: center;
+          }
+
+          .otp input[type="number"] {
+            letter-spacing: 0px !important;
+            text-align: start !important;
+            font-size: 18px !important;
+          }
+
+          .resendOtpBtn {
+            width: 100%;
+            color: rgb(66, 66, 66);
+            font-family: semiBold-font;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: end;
+          }
+
+        }
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .mat-form-field {
+    width: 100%;
+    font-family: medium-font;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgb(28 28 28 / 12%) !important;
+  }
+
+  .mat-input-element {
+    caret-color: rgb(28 28 28 / 12%) !important;
+  }
+
+  .mat-form-field-label {
+    color: rgb(0, 0, 0) !important;
+  }
+
+  .mat-form-field-prefix .mat-icon,
+  .mat-form-field-suffix .mat-icon {
+    color: rgb(28 28 28 / 12%) !important;
+  }
+
+  input.mat-input-element {
+    margin-top: -0.0625em;
+    font-family: "semibold-font";
+    opacity: 0.9;
+  }
+}

@@ -1,0 +1,192 @@
+::ng-deep {
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 0 0.75em 0 0.75em;
+    margin-top: 0.75em !important;
+    position: relative;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0 !important;
+  }
+}
+
+hr {
+  opacity: 0.1;
+}
+
+.sort-bar {
+  h2 {
+    font-family: semibold-font;
+    opacity: 0.9;
+    margin-bottom: 0px;
+    padding: 14px 0px;
+  }
+}
+
+.filter-box {
+  padding: 24px;
+
+  h1 {
+    font-family: bold-font;
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  small {
+    font-family: semibold-font;
+    font-size: 14px;
+    margin: 0px 0;
+  }
+
+  mat-checkbox {
+    margin: 8px 4px;
+    font-family: medium-font;
+    opacity: 0.9;
+  }
+
+  hr {
+    border-top: 1px solid gray !important;
+    margin: 18px 0 !important;
+  }
+
+  mat-slider {
+    width: 100%;
+  }
+}
+
+.carousel-indicators {
+  margin-bottom: 0rem !important;
+
+  button {
+    background: white !important;
+  }
+}
+
+.imgOfCard {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.hotel-details {
+  h2 {
+    width: 80%;
+    font-family: semibold-font;
+    opacity: 0.9;
+    margin-bottom: -3px;
+  }
+
+  h5 {
+    line-height: 1.5em;
+    height: 3em;
+    width: 100%;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: light-font;
+    -o-text-overflow: ellipsis;
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  .rating-Box {
+    .rateBtn {
+      background-color: #1ab64f;
+      color: #fff;
+      width: 55px;
+      font-family: semibold-font;
+      border: none;
+      padding: 0px 0px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    span {
+      opacity: 0.9;
+      font-family: light-font;
+      font-size: 12px;
+    }
+  }
+
+  .facility-Box {
+    span {
+      font-family: light-font;
+      padding-right: 12px;
+      font-size: 13px;
+    }
+
+    img {
+      width: 18px;
+      height: 16px;
+      margin-right: 5px;
+    }
+  }
+
+  .price-box {
+    span {
+      font-family: medium-font;
+      padding-right: 4px;
+    }
+
+    span:first-child {
+      font-size: 22px;
+      font-family: semibold-font;
+      color: rgb(221, 0, 0);
+    }
+
+    span:nth-child(2) {
+      opacity: 0.9;
+      font-size: 12px;
+    }
+
+    span:last-child {
+      font-size: 12px;
+      color: rgb(221, 99, 0);
+    }
+  }
+
+  .action-btn {
+    a {
+      button {
+        font-family: semibold-font;
+        width: 140px;
+        padding: 6px 0px;
+        border-radius: 5px;
+        background: #f9f9f9 !important;
+        color: #000;
+        margin-right: 10px;
+        border: 1px solid #e3e3e3;
+      }
+    }
+
+    button {
+      font-family: semibold-font;
+      width: 140px;
+      padding: 6px 0px;
+      border-radius: 5px;
+    }
+
+    button:first-child {
+    }
+
+    button:last-child {
+      background-color: #1ab64f;
+      color: #ffffff;
+      border: 1px solid #1ab64f;
+    }
+  }
+}
+
+// ! temp
+
+table {
+  width: 100%;
+}
+
+.grayscle-0 {
+  filter: grayscale(0);
+}
+
+.grayscle-1 {
+  filter: grayscale(1);
+}
